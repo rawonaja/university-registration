@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendaftaran Universitas Negeri Padang</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#beranda">Beranda</a></li>
+                <li><a href="index.html#pengumuman">Pengumuman</a></li>
+                <li><a href="pendaftaran.html">Pendaftaran</a></li>
+                <li><a href="index.html#informasi">Informasi</a></li>
+                <li><a href="index.html#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+        <h1>Form Pendaftaran Universitas Negeri Padang</h1>
+        <h2>2025</h2>
+    </header>
+
+    <section id="beranda" class="form-container">
+        <h2>Halaman Pendaftaran</h2>
+        <p>Silakan isi formulir pendaftaran dengan benar.</p>
+
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <fieldset>
+                <legend>1. Biodata Pendaftar</legend>
+                <label for="nomor">Nomor Pendaftaran</label>
+                <input type="text" id="nomor" name="nomor" required>
+
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" required>
+
+                <label for="nisn">NISN</label>
+                <input type="text" id="nisn" name="nisn" required>
+
+                <label for="sekolah">Asal Sekolah</label>
+                <input type="text" id="sekolah" name="sekolah" required>
+
+                <label for="gender">Jenis Kelamin</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Pilih</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>2. Program Studi</legend>
+                <label for="fakultas">Fakultas</label>
+                <select id="fakultas" name="fakultas" onchange="updateProdi()" required>
+                    <option value="">Pilih Fakultas</option>
+                    <option value="Teknik">Fakultas Teknik</option>
+                    <option value="Ekonomi">Fakultas Ekonomi</option>
+                    <option value="Hukum">Hukum</option>
+                    <option value="Kedokteran">Kedokteran</option>
+                    <option value="Ilmu Pendidikan">Ilmu Pendidikan</option>
+                    <option value="Ilmu Sosial">Ilmu Sosial</option>
+                    <option value="Ilmu Budaya">Ilmu Budaya</option>
+                    <option value="Ilmu Alam">Ilmu Alam</option>
+                    <option value="Ilmu Keolahragaan">Ilmu Keolahragaan</option>
+                    <option value="Ilmu Pertanian">Ilmu Pertanian</option>
+                    <option value="Ilmu Kehutanan">Ilmu Kehutanan</option>
+                    <option value="Ilmu Peternakan">Ilmu Peternakan</option>
+                </select>
+
+                <label for="prodi">Program Studi</label>
+                <select id="prodi" name="prodi" required>
+                    <option value="">Pilih Program Studi</option>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Teknik Mesin">Teknik Mesin</option>
+                    <option value="Teknik Sipil">Teknik Sipil</option>
+                    <option value="PGSD">PGSD</option>
+                    <option value="Pendidikan Bahasa Inggris">Pendidikan Bahasa Inggris</option>
+                    <option value="Hukum">Hukum</option>
+                    <option value="Pendidikan Dokter Gigi">Pendidikan Dokter Gigi</option>
+                    <option value="Manajemen Bisnis">Manajemen Bisnis</option>
+                    <option value="Ilmu Komunikasi">Ilmu Komunikasi</option>
+                    <option value="Ilmu Hubungan Internasional">Ilmu Hubungan Internasional</option>
+                    <option value="Ilmu Pemerintahan">Ilmu Pemerintahan</option>
+                    <option value="Ilmu Sejarah">Ilmu Sejarah</option>
+                    <option value="Ilmu Arkeologi">Ilmu Arkeologi</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>3. Upload Dokumen</legend>
+                <label for="ktp">Upload KTP</label>
+                <input type="file" id="ktp" name="ktp" accept="image/*" required>
+
+                <label for="ijazah">Upload Ijazah</label>
+                <input type="file" id="ijazah" name="ijazah" accept="application/pdf" required>
+
+                <label for="foto">Upload Pas Foto</label>
+                <input type="file" id="foto" name="foto" accept="image/*" required>
+            </fieldset>
+
+            <fieldset>
+                <legend>4. Data Orang Tua</legend>
+                <label for="namaAyah">Nama Ayah</label>
+                <input type="text" id="namaAyah" name="namaAyah" required>
+
+                <label for="pekerjaanAyah">Pekerjaan Ayah</label>
+                <input type="text" id="pekerjaanAyah" name="pekerjaanAyah" required>
+
+                <label for="namaIbu">Nama Ibu</label>
+                <input type="text" id="namaIbu" name="namaIbu" required>
+
+                <label for="pekerjaanIbu">Pekerjaan Ibu</label>
+                <input type="text" id="pekerjaanIbu" name="pekerjaanIbu" required>
+            </fieldset>
+
+            <button type="button" onclick="previewData()">Preview</button>
+            <button type="submit">Kirim</button>
+        </form>
+    </section>
+
+    <div id="preview-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePreview()">&times;</span>
+            <h2>Preview Data</h2>
+            <p id="preview-content"></p>
+            <button onclick="submitForm()">Konfirmasi</button>
+        </div>
+    </div>
+</body>
+</html>
